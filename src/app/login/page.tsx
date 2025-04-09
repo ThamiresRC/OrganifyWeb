@@ -3,11 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
@@ -23,7 +25,8 @@ export default function LoginPage() {
 
       if (user) {
         setMensagem("Login realizado com sucesso!");
-        // redirecionar ou salvar token, etc.
+        
+        router.push("/schedule");
       } else {
         setMensagem("Email ou senha inválidos.");
       }
@@ -54,9 +57,8 @@ export default function LoginPage() {
         </div>
       </header>
 
-      {/* Conteúdo principal */}
+      
       <div className="flex items-center justify-between flex-1 p-10">
-        {/* Logo */}
         <div className="flex-shrink-0">
           <Image
             src="/imagens/Logo.jfif"
@@ -67,7 +69,7 @@ export default function LoginPage() {
           />
         </div>
 
-        {/* Formulário de Login */}
+        
         <div className="flex flex-col justify-start items-end mr-40">
           <div className="text-center mb-10 mr-10">
             <h2 className="text-4xl font-bold text-green-900">Login</h2>
@@ -104,13 +106,13 @@ export default function LoginPage() {
               Entrar
             </button>
 
-            {/* Mensagem de erro/sucesso */}
+            
             {mensagem && (
               <p className="mt-4 text-sm text-red-600 text-center">{mensagem}</p>
             )}
           </div>
 
-          {/* Link para cadastro */}
+          
           <h3 className="pt-6 mr-52 text-sm">
             Não tem uma conta?{" "}
             <Link href="/register" className="text-blue-500 hover:underline">
@@ -124,14 +126,13 @@ export default function LoginPage() {
       <footer className="bg-green-600 text-white py-6">
         <div className="container mx-auto px-4 text-center text-sm flex flex-col md:flex-row justify-between items-center">
           <span>
-            &copy; {new Date().getFullYear()} MeuSite. Todos os direitos
-            reservados.
+            &copy; {new Date().getFullYear()} MeuSite. Todos os direitos reservados.
           </span>
           <div className="mt-2 md:mt-0">
             <span className="mr-4">RM556480</span>
-            <span>RM789012</span>
+            <span>RM558128</span>
           </div>
-        </div>
+        </div>  
       </footer>
     </main>
   );

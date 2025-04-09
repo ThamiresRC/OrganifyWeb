@@ -70,9 +70,8 @@ export default function CadastroPage() {
         </div>
       </header>
 
-      {/* Conteúdo principal */}
       <div className="flex items-center justify-between flex-1 p-10">
-        {/* Logo */}
+        
         <div className="flex-shrink-0">
           <Image
             src="/imagens/Logo.jfif"
@@ -83,7 +82,7 @@ export default function CadastroPage() {
           />
         </div>
 
-        {/* Formulário de Cadastro */}
+
         <div className="flex flex-col justify-start items-end mr-40">
           <div className="text-center mb-10 mr-10">
             <h2 className="text-4xl font-bold text-green-900">Cadastrar</h2>
@@ -91,7 +90,7 @@ export default function CadastroPage() {
           </div>
 
           <div className="flex flex-col items-end w-full max-w-md">
-            {/* Nome */}
+
             <div className="mb-6 w-full">
               <label className="block text-xl mb-2 text-green-900">Nome</label>
               <input
@@ -104,7 +103,7 @@ export default function CadastroPage() {
               {erros.nome && <p className="text-red-600 mt-1 text-sm">{erros.nome}</p>}
             </div>
 
-            {/* Email */}
+            
             <div className="mb-6 w-full">
               <label className="block text-xl mb-2 text-green-900">Email</label>
               <input
@@ -117,7 +116,7 @@ export default function CadastroPage() {
               {erros.email && <p className="text-red-600 mt-1 text-sm">{erros.email}</p>}
             </div>
 
-            {/* Senha */}
+            
             <div className="mb-6 w-full">
               <label className="block text-xl mb-2 text-green-900">Senha</label>
               <input
@@ -142,7 +141,7 @@ export default function CadastroPage() {
             )}
           </div>
 
-          {/* Link para login */}
+          
           <h3 className="pt-6 mr-52 text-sm">
             Já tem uma conta?{" "}
             <Link href="/login" className="text-blue-500 hover:underline">
@@ -152,7 +151,7 @@ export default function CadastroPage() {
         </div>
       </div>
 
-      {/* Rodapé */}
+      
       <footer className="bg-green-600 text-white py-6">
         <div className="container mx-auto px-4 text-center text-sm flex flex-col md:flex-row justify-between items-center">
           <span>&copy; {new Date().getFullYear()} MeuSite. Todos os direitos reservados.</span>
