@@ -9,9 +9,23 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
+  const [erros, setErros] = useState({ email: "", senha: "" });
+
   const router = useRouter();
 
   const handleLogin = async () => {
+    setMensagem("");
+    setErros({ email: "", senha: "" });
+
+    if (!email || !senha) {
+      const novosErros = {
+        email: email ? "" : "Email é obrigatório.",
+        senha: senha ? "" : "Senha é obrigatória.",
+      };
+      setErros(novosErros);
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:8080/api/users", {
         method: "GET",
@@ -25,10 +39,16 @@ export default function LoginPage() {
 
       if (user) {
         setMensagem("Login realizado com sucesso!");
-        
         router.push("/schedule");
       } else {
-        setMensagem("Email ou senha inválidos.");
+        const emailExiste = users.some((u: any) => u.email === email);
+
+        setErros({
+          email: emailExiste ? "" : "Email incorreto.",
+          senha: emailExiste ? "Senha incorreta." : "",
+        });
+
+        setMensagem("Erro ao fazer login. Corrija os campos acima.");
       }
     } catch (error) {
       setMensagem("Erro de conexão com o servidor.");
@@ -57,7 +77,7 @@ export default function LoginPage() {
         </div>
       </header>
 
-      
+      {/* Conteúdo */}
       <div className="flex items-center justify-between flex-1 p-10">
         <div className="flex-shrink-0">
           <Image
@@ -69,7 +89,6 @@ export default function LoginPage() {
           />
         </div>
 
-        
         <div className="flex flex-col justify-start items-end mr-40">
           <div className="text-center mb-10 mr-10">
             <h2 className="text-4xl font-bold text-green-900">Login</h2>
@@ -86,6 +105,9 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full p-3 border border-green-900 rounded-full"
               />
+              {erros.email && (
+                <p className="text-red-600 mt-1 text-sm">{erros.email}</p>
+              )}
             </div>
 
             <div className="mb-6 w-full">
@@ -97,6 +119,9 @@ export default function LoginPage() {
                 onChange={(e) => setSenha(e.target.value)}
                 className="w-full p-3 border border-green-900 rounded-full"
               />
+              {erros.senha && (
+                <p className="text-red-600 mt-1 text-sm">{erros.senha}</p>
+              )}
             </div>
 
             <button
@@ -106,13 +131,11 @@ export default function LoginPage() {
               Entrar
             </button>
 
-            
             {mensagem && (
               <p className="mt-4 text-sm text-red-600 text-center">{mensagem}</p>
             )}
           </div>
 
-          
           <h3 className="pt-6 mr-52 text-sm">
             Não tem uma conta?{" "}
             <Link href="/register" className="text-blue-500 hover:underline">
@@ -132,7 +155,7 @@ export default function LoginPage() {
             <span className="mr-4">RM556480</span>
             <span>RM558128</span>
           </div>
-        </div>  
+        </div>
       </footer>
     </main>
   );
